@@ -1,19 +1,19 @@
 import React from "react";
 import { CardDeck } from "react-bootstrap";
-import { list } from "../fakeService/cardList";
-import TrelloCard from "../components/TrelloCard";
+import TrelloCard from "./TrelloCard";
 
-function TrelloList(props) {
+function TrelloList({ list }) {
   return (
     <div className="list">
-      <CardDeck>
+      <CardDeck className="list-scroll">
         {list.map((card) => {
           return (
             <TrelloCard
               className="card-body"
+              as="col"
               key={card.id}
               {...card}
-            ></TrelloCard>
+            />
           );
         })}
       </CardDeck>

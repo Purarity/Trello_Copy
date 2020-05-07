@@ -109,4 +109,112 @@ export const list = [
       },
     ],
   },
+  {
+    id: "3",
+    title: "Back Office Page (backend)",
+    tags: ["MVP"],
+    tasks: [
+      {
+        id: "3a",
+        title: "CRUD Reservations",
+        description:
+          "Reservations data structure(id,customerId,productId,status",
+      },
+      {
+        id: "3b",
+        title: "CRUD Customers",
+        description: "",
+      },
+    ],
+  },
+  {
+    id: "4",
+    title: "Back Office Page (backend)",
+    tags: ["MVP"],
+    tasks: [
+      {
+        id: "4a",
+        title: "CRUD Reservations",
+        description:
+          "Reservations data structure(id,customerId,productId,status",
+      },
+      {
+        id: "4b",
+        title: "CRUD Customers",
+        description: "",
+      },
+    ],
+  },
+  {
+    id: "5",
+    title: "Back Office Page (backend)",
+    tags: ["MVP"],
+    tasks: [
+      {
+        id: "5a",
+        title: "CRUD Reservations",
+        description:
+          "Reservations data structure(id,customerId,productId,status",
+      },
+      {
+        id: "5b",
+        title: "CRUD Customers",
+        description: "",
+      },
+    ],
+  },
+  {
+    id: "6",
+    title: "Back Office Page (backend)",
+    tags: ["MVP"],
+    tasks: [
+      {
+        id: "6a",
+        title: "CRUD Reservations",
+        description:
+          "Reservations data structure(id,customerId,productId,status",
+      },
+      {
+        id: "6b",
+        title: "CRUD Customers",
+        description: "",
+      },
+    ],
+  },
+  {
+    id: "7",
+    title: "Back Office Page (backend)",
+    tags: ["MVP"],
+    tasks: [
+      {
+        id: "7a",
+        title: "CRUD Reservations",
+        description:
+          "Reservations data structure(id,customerId,productId,status",
+      },
+      {
+        id: "7b",
+        title: "CRUD Customers",
+        description: "",
+      },
+    ],
+  },
+  {
+    id: "8",
+    title: "Back Office Page (backend)",
+    tags: ["MVP"],
+    tasks: [
+      {
+        id: "8a",
+        title: "CRUD Reservations",
+        description:
+          "Reservations data structure(id,customerId,productId,status",
+      },
+      {
+        id: "8b",
+        title: "CRUD Customers",
+        description: "",
+      },
+    ],
+  },
 ];
