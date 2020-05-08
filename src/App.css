@@ -67,9 +67,66 @@
 .checks {
   position: relative;
   bottom: 2px;
-  right: 5px;
+  right: 1px;
 }
 
 .pointer {
   cursor: pointer;
+}
+
+.list-title-in-task {
+  font-size: 13px;
+  padding-left: 3px;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.empty-box {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  top: 3px;
+  margin-right: 3px;
+  width: 22px;
+  height: 22px;
+  border: 2px solid;
+  transform: scale(var(--ggs, 1));
+  border-radius: 4px;
+}
+
+.option-hover:hover {
+  background-color: #eaecf0;
+  border-radius: 5px;
+  border-left: 20px;
+}
+
+.trello-modal .modal-content {
+  background-color: #f4f5f7;
+}
+
+.button-in-modal {
+  margin-left: 5px;
+  color: #253858;
+  background-color: #eaecf0;
+  border-width: 0;
+}
+
+.button-in-modal:hover {
+  margin-left: 5px;
+  color: #253858;
+  background-color: #e2e4e9;
+  border-width: 0;
+}
+
+.button-in-modal:active {
+  margin-left: 5px;
+  color: #253858;
+  background-color: #e2e4e9;
+  border-width: 0;
+}
+
+.align-right {
+  float: right;
 }

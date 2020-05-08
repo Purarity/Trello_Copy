@@ -29,9 +29,9 @@ export const list = [
             id: "1b1",
             name: "Features",
             list: [
-              { id: "1b1a", name: "Filtering" },
-              { id: "1b1b", name: "Sorting" },
-              { id: "1b1c", name: "Pagination" },
+              { id: "1b1a", name: "Filtering", checked: false },
+              { id: "1b1b", name: "Sorting", checked: true },
+              { id: "1b1c", name: "Pagination", checked: false },
             ],
           },
         ],
