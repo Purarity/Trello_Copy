@@ -4,6 +4,7 @@ import TrelloModal from "./TrelloModal";
 
 function TrelloCard({
   id,
+  listId,
   listTitle,
   title: taskTitle,
   description,
@@ -33,7 +34,9 @@ function TrelloCard({
         key={id}
       >
         <div>
-          {description ? <i className="gg-format-left" /> : null}
+          {description ? (
+            <i className="gg-format-left" />
+          ) : null}
           {checkList ? (
             <>
               <i className="gg-check-r" />
@@ -48,6 +51,8 @@ function TrelloCard({
       </Card>
       {showModal ? (
         <TrelloModal
+          listId={listId}
+          cardId={id}
           listTitle={listTitle}
           taskTitle={taskTitle}
           description={description}

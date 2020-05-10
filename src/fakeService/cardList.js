@@ -1,9 +1,9 @@
-export const list = [
+export const lists = [
   {
     id: "1",
     title: "Consumer Page (frontend)",
     tags: ["MVP"],
-    tasks: [
+    cards: [
       {
         id: "1b",
         title: "View all products",
@@ -29,9 +29,21 @@ export const list = [
             id: "1b1",
             name: "Features",
             list: [
-              { id: "1b1a", name: "Filtering", checked: false },
-              { id: "1b1b", name: "Sorting", checked: true },
-              { id: "1b1c", name: "Pagination", checked: false },
+              {
+                id: "1b1a",
+                name: "Filtering",
+                checked: false,
+              },
+              {
+                id: "1b1b",
+                name: "Sorting",
+                checked: true,
+              },
+              {
+                id: "1b1c",
+                name: "Pagination",
+                checked: false,
+              },
             ],
           },
         ],
@@ -46,7 +58,11 @@ export const list = [
             id: "1a1",
             name: "Features",
             list: [
-              { id: "1a1a", name: "Select quantity", checked: true },
+              {
+                id: "1a1a",
+                name: "Select quantity",
+                checked: true,
+              },
               {
                 id: "1a1b",
                 name:
@@ -82,7 +98,8 @@ export const list = [
               },
               {
                 id: "1a2e",
-                name: "Stock status (red 0, yellow badge 1-10 or green 10+)",
+                name:
+                  "Stock status (red 0, yellow badge 1-10 or green 10+)",
                 checked: false,
               },
             ],
@@ -95,7 +112,7 @@ export const list = [
     id: "2",
     title: "Back Office Page (backend)",
     tags: ["MVP"],
-    tasks: [
+    cards: [
       {
         id: "2a",
         title: "CRUD Reservations",
@@ -113,7 +130,7 @@ export const list = [
     id: "3",
     title: "Back Office Page (backend)",
     tags: ["MVP"],
-    tasks: [
+    cards: [
       {
         id: "3a",
         title: "CRUD Reservations",
@@ -131,7 +148,7 @@ export const list = [
     id: "4",
     title: "Back Office Page (backend)",
     tags: ["MVP"],
-    tasks: [
+    cards: [
       {
         id: "4a",
         title: "CRUD Reservations",
@@ -149,7 +166,7 @@ export const list = [
     id: "5",
     title: "Back Office Page (backend)",
     tags: ["MVP"],
-    tasks: [
+    cards: [
       {
         id: "5a",
         title: "CRUD Reservations",
@@ -167,7 +184,7 @@ export const list = [
     id: "6",
     title: "Back Office Page (backend)",
     tags: ["MVP"],
-    tasks: [
+    cards: [
       {
         id: "6a",
         title: "CRUD Reservations",
@@ -185,7 +202,7 @@ export const list = [
     id: "7",
     title: "Back Office Page (backend)",
     tags: ["MVP"],
-    tasks: [
+    cards: [
       {
         id: "7a",
         title: "CRUD Reservations",
@@ -203,7 +220,7 @@ export const list = [
     id: "8",
     title: "Back Office Page (backend)",
     tags: ["MVP"],
-    tasks: [
+    cards: [
       {
         id: "8a",
         title: "CRUD Reservations",

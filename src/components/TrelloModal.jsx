@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import { ListsContext } from "../context/listContext";
 
 function TrelloModal({
+  listId,
+  cardId,
   listTitle,
   taskTitle,
   description,
@@ -9,24 +12,43 @@ function TrelloModal({
   showModal,
   handleCloseModal,
 }) {
-  const [editDescriptionBox, setEditDescriptionBox] = useState(false);
+  const [
+    showEditDescription,
+    setShowEditDescription,
+  ] = useState(false);
+  const { changeValue } = useContext(ListsContext);
 
   return (
-    <Modal show={showModal} onHide={handleCloseModal} className="trello-modal">
+    <Modal
+      show={showModal}
+      onHide={handleCloseModal}
+      className="trello-modal"
+    >
       <Modal.Header closeButton>
         <Modal.Title>
           {taskTitle}
           <div className="list-title-in-task">
-            in list <span className="underline">{listTitle}</span>
+            in list
+            <span className="underline">{listTitle}</span>
           </div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h6>
           Description
-          {description && (
+          {description && !showEditDescription && (
             <Button
-              onClick={() => setEditDescriptionBox(true)}
+              // onClick={() => setShowEditDescription(true)}
+              onClick={() =>
+                changeValue({
+                  type: "edit description",
+                  payload: {
+                    listId,
+                    cardId,
+                    property: "description",
+                  },
+                })
+              }
               className="button-in-modal"
             >
               Edit
@@ -34,8 +56,13 @@ function TrelloModal({
           )}
         </h6>
         <p>
-          {editDescriptionBox ? (
-            <Form.Control as="textarea"></Form.Control>
+          {showEditDescription ? (
+            <Form.Control
+              defaultValue={description}
+              onBlur={() => setShowEditDescription(false)}
+              as="textarea"
+              autoFocus
+            ></Form.Control>
           ) : (
             description
           )}
@@ -43,8 +70,16 @@ function TrelloModal({
         {checkList &&
           checkList.map((group) => {
             return (
-              <div style={{ paddingBottom: "30px" }} key={group.id}>
-                <div style={{ fontWeight: "500", paddingBottom: "10px" }}>
+              <div
+                style={{ paddingBottom: "30px" }}
+                key={group.id}
+              >
+                <div
+                  style={{
+                    fontWeight: "500",
+                    paddingBottom: "10px",
+                  }}
+                >
                   <i className="gg-check-r" /> {group.name}
                   <Button className="button-in-modal align-right">
                     Delete
@@ -52,7 +87,10 @@ function TrelloModal({
                 </div>
                 {group.list.map((option) => {
                   return (
-                    <div className="option-hover" key={option.id}>
+                    <div
+                      className="option-hover"
+                      key={option.id}
+                    >
                       {option.checked ? (
                         <i className="gg-check-r pointer" />
                       ) : (

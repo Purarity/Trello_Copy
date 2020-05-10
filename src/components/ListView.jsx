@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CardDeck } from "react-bootstrap";
 import TrelloList from "./TrelloList";
+import { ListsContext } from "../context/listContext";
 
-function ListView({ list }) {
+function ListView(props) {
+  const { lists } = useContext(ListsContext);
   return (
     <div className="list">
       <CardDeck className="list-scroll">
-        {list.map((card) => {
+        {lists.map((list) => {
           return (
             <TrelloList
               className="card-body"
               as="col"
-              key={card.id}
-              {...card}
+              key={list.id}
+              id={list.id}
+              {...list}
             />
           );
         })}
