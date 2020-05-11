@@ -3,7 +3,7 @@ import { CardDeck } from "react-bootstrap";
 import TrelloList from "./TrelloList";
 import { ListsContext } from "../context/listContext";
 
-function ListView(props) {
+function AllListView(props) {
   const { lists } = useContext(ListsContext);
   return (
     <div className="list">
@@ -23,4 +23,4 @@ function ListView(props) {
     </div>
   );
 }
-export default ListView;
+export default AllListView;

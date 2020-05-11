@@ -12,7 +12,7 @@ export const lists = [
           {
             id: "1b1",
             name: "Features",
-            list: [
+            options: [
               { id: "1b1a", name: "Filtering" },
               { id: "1b1b", name: "Sorting" },
               { id: "1b1c", name: "Pagination" },
@@ -28,7 +28,7 @@ export const lists = [
           {
             id: "1b1",
             name: "Features",
-            list: [
+            options: [
               {
                 id: "1b1a",
                 name: "Filtering",
@@ -57,7 +57,7 @@ export const lists = [
           {
             id: "1a1",
             name: "Features",
-            list: [
+            options: [
               {
                 id: "1a1a",
                 name: "Select quantity",
@@ -79,7 +79,7 @@ export const lists = [
           {
             id: "1a2",
             name: "Information",
-            list: [
+            options: [
               { id: "1a2a", name: "Image", checked: false },
               {
                 id: "1a2b",
@@ -98,8 +98,7 @@ export const lists = [
               },
               {
                 id: "1a2e",
-                name:
-                  "Stock status (red 0, yellow badge 1-10 or green 10+)",
+                name: "Stock status (red 0, yellow badge 1-10 or green 10+)",
                 checked: false,
               },
             ],

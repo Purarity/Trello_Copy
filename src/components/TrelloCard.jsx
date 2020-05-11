@@ -17,10 +17,10 @@ function TrelloCard({
   let checked = 0;
   let totalChecks = 0;
   if (checkList) {
-    checkList.forEach((list1) => {
-      list1.list.forEach((list2) => {
+    checkList.forEach((group) => {
+      group.options.forEach((option) => {
         totalChecks++;
-        if (list2.checked) {
+        if (option.checked) {
           checked++;
         }
       });
@@ -34,10 +34,8 @@ function TrelloCard({
         key={id}
       >
         <div>
-          {description ? (
-            <i className="gg-format-left" />
-          ) : null}
-          {checkList ? (
+          {description ? <i className="gg-format-left" /> : null}
+          {checkList && checkList.length > 0 ? (
             <>
               <i className="gg-check-r" />
               <span className="checks">{`${checked}/${totalChecks}`}</span>

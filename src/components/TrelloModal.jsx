@@ -1,6 +1,7 @@
-import React, { useState, useContext } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
-import { ListsContext } from "../context/listContext";
+import React, { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
+import TaskTextBox from "./TaskTextBox";
+import CheckList from "./CheckList";
 
 function TrelloModal({
   listId,
@@ -12,18 +13,11 @@ function TrelloModal({
   showModal,
   handleCloseModal,
 }) {
-  const [
-    showEditDescription,
-    setShowEditDescription,
-  ] = useState(false);
-  const { changeValue } = useContext(ListsContext);
+  const [showEditBox, setShowEditBox] = useState(false);
+  const [text, setText] = useState("");
 
   return (
-    <Modal
-      show={showModal}
-      onHide={handleCloseModal}
-      className="trello-modal"
-    >
+    <Modal show={showModal} onHide={handleCloseModal} className="trello-modal">
       <Modal.Header closeButton>
         <Modal.Title>
           {taskTitle}
@@ -36,73 +30,45 @@ function TrelloModal({
       <Modal.Body>
         <h6>
           Description
-          {description && !showEditDescription && (
+          {description && !showEditBox && (
             <Button
-              // onClick={() => setShowEditDescription(true)}
-              onClick={() =>
-                changeValue({
-                  type: "edit description",
-                  payload: {
-                    listId,
-                    cardId,
-                    property: "description",
-                  },
-                })
-              }
+              onClick={() => {
+                setText(description);
+                setShowEditBox(true);
+              }}
               className="button-in-modal"
             >
               Edit
             </Button>
           )}
         </h6>
-        <p>
-          {showEditDescription ? (
-            <Form.Control
-              defaultValue={description}
-              onBlur={() => setShowEditDescription(false)}
-              as="textarea"
-              autoFocus
-            ></Form.Control>
+        <p
+          onClick={() => {
+            setText(description);
+            setShowEditBox(true);
+          }}
+        >
+          {showEditBox ? (
+            <TaskTextBox
+              setText={setText}
+              text={text}
+              setShowEditBox={setShowEditBox}
+              type="description"
+              payload={{ listId, cardId, property: "description", value: text }}
+            />
           ) : (
             description
           )}
         </p>
-        {checkList &&
-          checkList.map((group) => {
-            return (
-              <div
-                style={{ paddingBottom: "30px" }}
-                key={group.id}
-              >
-                <div
-                  style={{
-                    fontWeight: "500",
-                    paddingBottom: "10px",
-                  }}
-                >
-                  <i className="gg-check-r" /> {group.name}
-                  <Button className="button-in-modal align-right">
-                    Delete
-                  </Button>
-                </div>
-                {group.list.map((option) => {
-                  return (
-                    <div
-                      className="option-hover"
-                      key={option.id}
-                    >
-                      {option.checked ? (
-                        <i className="gg-check-r pointer" />
-                      ) : (
-                        <i className="empty-box pointer" />
-                      )}
-                      {option.name}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
+        {checkList && (
+          <CheckList
+            checkList={checkList}
+            listId={listId}
+            cardId={cardId}
+            text={text}
+            setText={setText}
+          />
+        )}
       </Modal.Body>
     </Modal>
   );
