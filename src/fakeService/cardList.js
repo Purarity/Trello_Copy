@@ -116,7 +116,7 @@ export const lists = [
         id: "2a",
         title: "CRUD Reservations",
         description:
-          "Reservations data structure(id,customerId,productId,status",
+          "Reservations data structure(id,customerId,productId,status)",
       },
       {
         id: "2b",

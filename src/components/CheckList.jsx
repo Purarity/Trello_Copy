@@ -1,14 +1,29 @@
 import React, { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import { ListsContext } from "./../context/listContext";
-import TaskTextBox from "./TaskTextBox";
+import CardTextBox from "./CardTextBox";
 
-function CheckList({ checkList, listId, cardId, text, setText }) {
-  const [showEditOption, setShowEditOption] = useState(false);
+function CheckList({
+  checkList,
+  listId,
+  cardId,
+  text,
+  setText,
+}) {
   const [showEditGroup, setShowEditGroup] = useState(false);
+  const [showEditOption, setShowEditOption] = useState(
+    false
+  );
+  const [showAddOption, setShowAddOption] = useState(false);
   const { changeValue } = useContext(ListsContext);
 
   return checkList.map((group) => {
+    const groupPayload = {
+      listId,
+      cardId,
+      groupId: group.id,
+      value: text,
+    };
     return (
       <div style={{ paddingBottom: "30px" }} key={group.id}>
         <div
@@ -21,21 +36,25 @@ function CheckList({ checkList, listId, cardId, text, setText }) {
           <span
             onClick={() => {
               setText(group.name);
-              setShowEditGroup({ state: true, id: group.id });
+              setShowEditGroup({
+                state: true,
+                id: group.id,
+              });
             }}
           >
-            {showEditGroup.state === true && showEditGroup.id === group.id ? (
-              <TaskTextBox
+            {showEditGroup.state === true &&
+            showEditGroup.id === group.id ? (
+              <CardTextBox
                 text={text}
                 setText={setText}
                 setShowEditBox={setShowEditGroup}
                 type="checklist"
                 payload={{
-                  groupId: group.id,
                   listId,
                   cardId,
-                  property: "group text",
                   value: text,
+                  groupId: group.id,
+                  property: "group text",
                 }}
               />
             ) : (
@@ -60,12 +79,9 @@ function CheckList({ checkList, listId, cardId, text, setText }) {
           </Button>
         </div>
         {group.options.map((option) => {
-          const payload = {
-            listId,
-            cardId,
-            groupId: group.id,
+          const optionPayload = {
+            ...groupPayload,
             optionId: option.id,
-            value: text,
           };
           return (
             <div className="option-hover" key={option.id}>
@@ -73,7 +89,10 @@ function CheckList({ checkList, listId, cardId, text, setText }) {
                 onClick={() =>
                   changeValue({
                     type: "checklist",
-                    payload: { ...payload, property: "checkbox" },
+                    payload: {
+                      ...optionPayload,
+                      property: "checkbox",
+                    },
                   })
                 }
               >
@@ -86,18 +105,21 @@ function CheckList({ checkList, listId, cardId, text, setText }) {
               <span
                 onClick={() => {
                   setText(option.name);
-                  setShowEditOption({ state: true, id: option.id });
+                  setShowEditOption({
+                    state: true,
+                    id: option.id,
+                  });
                 }}
               >
                 {showEditOption.state === true &&
                 showEditOption.id === option.id ? (
-                  <TaskTextBox
+                  <CardTextBox
                     text={text}
                     setText={setText}
                     setShowEditBox={setShowEditOption}
                     type="checklist"
                     payload={{
-                      ...payload,
+                      ...optionPayload,
                       property: "option text",
                       value: text,
                     }}
@@ -109,6 +131,47 @@ function CheckList({ checkList, listId, cardId, text, setText }) {
             </div>
           );
         })}
+        {showAddOption.state === true &&
+        showAddOption.id === group.id ? (
+          <>
+            <CardTextBox
+              text={text}
+              setText={setText}
+              setShowEditBox={setShowAddOption}
+              dontUpdateState
+            />
+            <Button
+              variant="success"
+              onClick={() => {
+                setShowAddOption(false);
+                changeValue({
+                  type: "checklist",
+                  payload: {
+                    ...groupPayload,
+                    text,
+                    property: "add",
+                  },
+                });
+              }}
+            >
+              Add
+            </Button>
+          </>
+        ) : (
+          <Button
+            className="button-in-modal"
+            style={{ marginLeft: "24px", marginTop: "5px" }}
+            onClick={() => {
+              setText("");
+              setShowAddOption({
+                state: true,
+                id: group.id,
+              });
+            }}
+          >
+            Add an item
+          </Button>
+        )}
       </div>
     );
   });

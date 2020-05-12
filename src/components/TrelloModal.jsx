@@ -1,75 +1,132 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
-import TaskTextBox from "./TaskTextBox";
+import { Modal, Button, Row, Col } from "react-bootstrap";
+import CardTextBox from "./CardTextBox";
 import CheckList from "./CheckList";
 
 function TrelloModal({
   listId,
   cardId,
   listTitle,
-  taskTitle,
   description,
   checkList,
   showModal,
   handleCloseModal,
 }) {
-  const [showEditBox, setShowEditBox] = useState(false);
+  const [
+    showEditDescription,
+    setShowEditDescription,
+  ] = useState(false);
+  const [showEditTitle, setShowEditTitle] = useState(false);
   const [text, setText] = useState("");
 
   return (
-    <Modal show={showModal} onHide={handleCloseModal} className="trello-modal">
+    <Modal
+      show={showModal}
+      onHide={handleCloseModal}
+      dialogClassName="trello-modal modal-90w"
+    >
       <Modal.Header closeButton>
-        <Modal.Title>
-          {taskTitle}
+        <Modal.Title style={{ width: "100%" }}>
+          <div
+            onClick={() => {
+              setText(listTitle);
+              setShowEditTitle(true);
+            }}
+          >
+            {showEditTitle ? (
+              <CardTextBox
+                setText={setText}
+                text={text}
+                setShowEditBox={setShowEditTitle}
+                type="list title"
+                payload={{
+                  listId,
+                  cardId,
+                  value: text,
+                }}
+              />
+            ) : (
+              listTitle
+            )}
+          </div>
           <div className="list-title-in-task">
-            in list
+            in list{" "}
             <span className="underline">{listTitle}</span>
           </div>
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <h6>
-          Description
-          {description && !showEditBox && (
-            <Button
+      <Row>
+        <Col md={9}>
+          <Modal.Body>
+            <h6>
+              <i className="gg-format-left" />
+              Description
+              {description && !showEditDescription && (
+                <Button
+                  onClick={() => {
+                    setText(description);
+                    setShowEditDescription(true);
+                  }}
+                  className="button-in-modal"
+                >
+                  Edit
+                </Button>
+              )}
+            </h6>
+            <p
               onClick={() => {
                 setText(description);
-                setShowEditBox(true);
+                setShowEditDescription(true);
               }}
-              className="button-in-modal"
             >
-              Edit
-            </Button>
-          )}
-        </h6>
-        <p
-          onClick={() => {
-            setText(description);
-            setShowEditBox(true);
-          }}
-        >
-          {showEditBox ? (
-            <TaskTextBox
-              setText={setText}
-              text={text}
-              setShowEditBox={setShowEditBox}
-              type="description"
-              payload={{ listId, cardId, property: "description", value: text }}
-            />
-          ) : (
-            description
-          )}
-        </p>
-        {checkList && (
-          <CheckList
-            checkList={checkList}
-            listId={listId}
-            cardId={cardId}
-            text={text}
-            setText={setText}
-          />
-        )}
-      </Modal.Body>
+              {!description && !showEditDescription && (
+                <span style={{ opacity: "80%" }}>
+                  Add a more detailed description
+                </span>
+              )}
+              {showEditDescription ? (
+                <CardTextBox
+                  setText={setText}
+                  text={text}
+                  setShowEditBox={setShowEditDescription}
+                  type="description"
+                  payload={{
+                    listId,
+                    cardId,
+                    property: "description",
+                    value: text,
+                  }}
+                />
+              ) : (
+                description
+              )}
+            </p>
+            {checkList && (
+              <CheckList
+                checkList={checkList}
+                listId={listId}
+                cardId={cardId}
+                text={text}
+                setText={setText}
+              />
+            )}
+          </Modal.Body>
+        </Col>
+        <Col>
+          <div>ADD TO CARD</div>
+          <Button
+            variant="light"
+            className="new-task-hover new-checklist-button"
+            block
+            disabled
+          >
+            <div className="align-left">
+              <i className="gg-check-r" />
+              Checklist
+            </div>
+          </Button>
+        </Col>
+      </Row>
     </Modal>
   );
 }
