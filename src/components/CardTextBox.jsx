@@ -8,7 +8,7 @@ function CardTextBox({
   setShowEditBox,
   type,
   payload,
-  dontUpdateState,
+  noEmptyText,
 }) {
   const { changeValue } = useContext(ListsContext);
   return (
@@ -19,15 +19,17 @@ function CardTextBox({
         setText(event.currentTarget.value)
       }
       onBlur={() => {
-        if (!dontUpdateState) {
-          setShowEditBox(false);
-          changeValue({
-            type,
-            payload,
-          });
+        setShowEditBox(false);
+        setText("");
+        if (noEmptyText && text === "") {
+          return;
         }
+        changeValue({
+          type,
+          payload,
+        });
       }}
-      as="textarea"
+      as="input"
     />
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button, Row, Col } from "react-bootstrap";
 import CardTextBox from "./CardTextBox";
 import CheckList from "./CheckList";
+import AddChecklistPopOver from "./AddChecklistPopOver";
 
 function TrelloModal({
   listId,
@@ -24,12 +25,13 @@ function TrelloModal({
       show={showModal}
       onHide={handleCloseModal}
       dialogClassName="trello-modal modal-90w"
+      enforceFocus={false}
     >
       <Modal.Header closeButton>
         <Modal.Title style={{ width: "100%" }}>
           <div
             onClick={() => {
-              setText(listTitle);
+              setText(text ? text : listTitle);
               setShowEditTitle(true);
             }}
           >
@@ -64,7 +66,7 @@ function TrelloModal({
               {description && !showEditDescription && (
                 <Button
                   onClick={() => {
-                    setText(description);
+                    setText(text ? text : description);
                     setShowEditDescription(true);
                   }}
                   className="button-in-modal"
@@ -75,7 +77,7 @@ function TrelloModal({
             </h6>
             <p
               onClick={() => {
-                setText(description);
+                setText(text ? text : description);
                 setShowEditDescription(true);
               }}
             >
@@ -114,17 +116,10 @@ function TrelloModal({
         </Col>
         <Col>
           <div>ADD TO CARD</div>
-          <Button
-            variant="light"
-            className="new-task-hover new-checklist-button"
-            block
-            disabled
-          >
-            <div className="align-left">
-              <i className="gg-check-r" />
-              Checklist
-            </div>
-          </Button>
+          <AddChecklistPopOver
+            listId={listId}
+            cardId={cardId}
+          />
         </Col>
       </Row>
     </Modal>

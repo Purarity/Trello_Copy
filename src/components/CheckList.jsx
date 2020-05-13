@@ -35,7 +35,7 @@ function CheckList({
           <i className="gg-check-r" />
           <span
             onClick={() => {
-              setText(group.name);
+              setText(text ? text : group.name);
               setShowEditGroup({
                 state: true,
                 id: group.id,
@@ -104,7 +104,7 @@ function CheckList({
               </span>
               <span
                 onClick={() => {
-                  setText(option.name);
+                  setText(text ? text : option.name);
                   setShowEditOption({
                     state: true,
                     id: option.id,
@@ -138,7 +138,13 @@ function CheckList({
               text={text}
               setText={setText}
               setShowEditBox={setShowAddOption}
-              dontUpdateState
+              noEmptyText
+              type="checklist"
+              payload={{
+                ...groupPayload,
+                property: "add",
+                value: text,
+              }}
             />
             <Button
               variant="success"
@@ -162,7 +168,7 @@ function CheckList({
             className="button-in-modal"
             style={{ marginLeft: "24px", marginTop: "5px" }}
             onClick={() => {
-              setText("");
+              setText(text ? text : "");
               setShowAddOption({
                 state: true,
                 id: group.id,

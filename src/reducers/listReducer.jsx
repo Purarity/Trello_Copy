@@ -7,6 +7,7 @@ export const listReducer = (state, action) => {
     groupId,
     optionId,
   } = action.payload;
+
   const listIndex = state.findIndex(
     (list) => list.id === listId
   );
@@ -29,7 +30,7 @@ export const listReducer = (state, action) => {
       const checkListIndex = card.checkList.findIndex(
         (checklist) => checklist.id === groupId
       );
-      const checkBoxIndex = card.checkList[
+      const optionIndex = card.checkList[
         checkListIndex
       ].options.findIndex(
         (option) => option.id === optionId
@@ -41,14 +42,14 @@ export const listReducer = (state, action) => {
             checkListIndex
           ].options.push({ id: Date.now(), name: value });
           break;
+
         case "checkbox":
           //toggle the boolean
           state[listIndex].cards[cardIndex].checkList[
             checkListIndex
-          ].options[checkBoxIndex].checked = !state[
-            listIndex
-          ].cards[cardIndex].checkList[checkListIndex]
-            .options[checkBoxIndex].checked;
+          ].options[optionIndex].checked = !state[listIndex]
+            .cards[cardIndex].checkList[checkListIndex]
+            .options[optionIndex].checked;
           break;
 
         case "group text":
@@ -60,7 +61,7 @@ export const listReducer = (state, action) => {
         case "option text":
           state[listIndex].cards[cardIndex].checkList[
             checkListIndex
-          ].options[checkBoxIndex].name = value;
+          ].options[optionIndex].name = value;
           break;
 
         case "delete":
@@ -72,6 +73,45 @@ export const listReducer = (state, action) => {
           state[listIndex].cards[
             cardIndex
           ].checkList = checkList;
+          break;
+
+        default:
+          break;
+      }
+
+      return [...state];
+
+    case "new":
+      const checklistGroup = {
+        id: Date.now(),
+        name: value,
+        options: [],
+      };
+
+      switch (property) {
+        case "checklist":
+          //check for existing checklist array
+          if (
+            !state[listIndex].cards[cardIndex].checkList
+          ) {
+            state[listIndex].cards[
+              cardIndex
+            ].checkList = [];
+          }
+
+          state[listIndex].cards[cardIndex].checkList.push(
+            checklistGroup
+          );
+          break;
+
+        case "card":
+          const card = {
+            id: Date.now(),
+            title: value,
+            description: "",
+          };
+
+          state[listIndex].cards.push(card);
           break;
 
         default:
