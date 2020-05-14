@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import TrelloModal from "./TrelloModal";
+import Label from "./Label";
 
 function TrelloCard({
   id,
@@ -9,6 +10,7 @@ function TrelloCard({
   title: cardTitle,
   description,
   checkList,
+  labels,
 }) {
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => setShowModal(false);
@@ -33,6 +35,9 @@ function TrelloCard({
         className="p-2 m-1 task-hover pointer"
         key={id}
       >
+        {labels?.length > 0 && (
+          <div>{<Label labels={labels} />}</div>
+        )}
         <div>{cardTitle}</div>
         <div>
           {description ? (
@@ -57,6 +62,7 @@ function TrelloCard({
           description={description}
           checkList={checkList}
           showModal={showModal}
+          labels={labels}
           handleCloseModal={handleCloseModal}
         />
       ) : null}

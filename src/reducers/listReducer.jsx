@@ -2,10 +2,10 @@ export const listReducer = (state, action) => {
   const {
     listId,
     cardId,
-    property,
-    value,
     groupId,
     optionId,
+    property,
+    value,
   } = action.payload;
 
   const listIndex = state.findIndex(
@@ -82,14 +82,14 @@ export const listReducer = (state, action) => {
       return [...state];
 
     case "new":
-      const checklistGroup = {
-        id: Date.now(),
-        name: value,
-        options: [],
-      };
-
       switch (property) {
         case "checklist":
+          const checklistGroup = {
+            id: Date.now(),
+            name: value,
+            options: [],
+          };
+
           //check for existing checklist array
           if (
             !state[listIndex].cards[cardIndex].checkList
@@ -112,6 +112,24 @@ export const listReducer = (state, action) => {
           };
 
           state[listIndex].cards.push(card);
+          break;
+
+        case "labels":
+          const label = {
+            id: Date.now(),
+            name: value,
+          };
+
+          //check for existing labels array
+          if (!state[listIndex].cards[cardIndex].labels) {
+            state[listIndex].cards[
+              cardIndex
+            ].checkList = [];
+          }
+
+          state[listIndex].cards[cardIndex].labels.push(
+            checklistGroup
+          );
           break;
 
         default:

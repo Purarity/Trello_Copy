@@ -1,19 +1,16 @@
-import React, { useState, useContext } from "react";
-import {
-  Popover,
-  OverlayTrigger,
-  Button,
-  Form,
-} from "react-bootstrap";
+import React, { useState, useContext, useRef } from "react";
+import { Popover, Button, Form } from "react-bootstrap";
 import { ListsContext } from "./../context/listContext";
 
-function TestPopOver({ listId, cardId }) {
+function ChecklistPopOver({ listId, cardId, name }) {
   const { changeValue } = useContext(ListsContext);
   const [text, setText] = useState("Checklist");
-
-  const popover = (
-    <Popover id="checklist">
-      <Popover.Title as="h5">Checklist</Popover.Title>
+  const ref = useRef(null);
+  const popOver = (
+    <Popover id="add popover">
+      <Popover.Title as="h5" ref={ref}>
+        {name}
+      </Popover.Title>
       <Popover.Content>
         <h6>Title</h6>
         <Form.Control
@@ -36,6 +33,8 @@ function TestPopOver({ listId, cardId }) {
                 value: text,
               },
             });
+            //hide the popover after clicking Add
+            document.body.click();
           }}
         >
           Add
@@ -44,28 +43,7 @@ function TestPopOver({ listId, cardId }) {
     </Popover>
   );
 
-  return (
-    <OverlayTrigger
-      trigger="click"
-      placement="bottom"
-      overlay={popover}
-      rootClose
-    >
-      <Button
-        variant="light"
-        className="new-task-hover new-checklist-button"
-        block
-      >
-        <div className="align-left">
-          <i
-            className="gg-check-r"
-            style={{ marginRight: "10px" }}
-          />
-          Checklist
-        </div>
-      </Button>
-    </OverlayTrigger>
-  );
+  return popOver;
 }
 
-export default TestPopOver;
+export default ChecklistPopOver;

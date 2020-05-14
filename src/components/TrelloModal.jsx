@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Modal, Button, Row, Col } from "react-bootstrap";
 import CardTextBox from "./CardTextBox";
 import CheckList from "./CheckList";
-import AddChecklistPopOver from "./AddChecklistPopOver";
+import Label from "./Label";
+import PopOverTrigger from "./PopOverTrigger";
 
 function TrelloModal({
   listId,
@@ -12,6 +13,7 @@ function TrelloModal({
   checkList,
   showModal,
   handleCloseModal,
+  labels,
 }) {
   const [
     showEditDescription,
@@ -19,6 +21,7 @@ function TrelloModal({
   ] = useState(false);
   const [showEditTitle, setShowEditTitle] = useState(false);
   const [text, setText] = useState("");
+  const newButtons = ["Checklist", "Labels"];
 
   return (
     <Modal
@@ -60,6 +63,10 @@ function TrelloModal({
       <Row>
         <Col md={9}>
           <Modal.Body>
+            {labels?.length > 0 && (
+              <div>{<Label labels={labels} />}</div>
+            )}
+            <br />
             <h6>
               <i className="gg-format-left" />
               Description
@@ -116,10 +123,14 @@ function TrelloModal({
         </Col>
         <Col>
           <div>ADD TO CARD</div>
-          <AddChecklistPopOver
-            listId={listId}
-            cardId={cardId}
-          />
+          {newButtons.map((button) => (
+            <PopOverTrigger
+              key={button}
+              listId={listId}
+              cardId={cardId}
+              name={button}
+            />
+          ))}
         </Col>
       </Row>
     </Modal>

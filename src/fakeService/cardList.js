@@ -2,11 +2,14 @@ export const lists = [
   {
     id: "1",
     title: "Consumer Page (frontend)",
-    tags: ["MVP"],
     cards: [
       {
         id: "1b",
         title: "View all products",
+        labels: [
+          { id: 1, color: "blue", name: "MVP" },
+          { id: 2, color: "yellow", name: "Frontend" },
+        ],
         description: "",
         checkList: [
           {
@@ -98,7 +101,8 @@ export const lists = [
               },
               {
                 id: "1a2e",
-                name: "Stock status (red 0, yellow badge 1-10 or green 10+)",
+                name:
+                  "Stock status (red 0, yellow badge 1-10 or green 10+)",
                 checked: false,
               },
             ],
@@ -110,11 +114,11 @@ export const lists = [
   {
     id: "2",
     title: "Back Office Page (backend)",
-    tags: ["MVP"],
     cards: [
       {
         id: "2a",
         title: "CRUD Reservations",
+        labels: [{ id: 1, color: "blue", name: "MVP" }],
         description:
           "Reservations data structure(id,customerId,productId,status)",
       },
@@ -128,11 +132,11 @@ export const lists = [
   {
     id: "3",
     title: "Back Office Page (backend)",
-    tags: ["MVP"],
     cards: [
       {
         id: "3a",
         title: "CRUD Reservations",
+        labels: [{ id: 1, color: "blue", name: "MVP" }],
         description:
           "Reservations data structure(id,customerId,productId,status",
       },
@@ -146,11 +150,11 @@ export const lists = [
   {
     id: "4",
     title: "Back Office Page (backend)",
-    tags: ["MVP"],
     cards: [
       {
         id: "4a",
         title: "CRUD Reservations",
+        labels: [{ id: 1, color: "blue", name: "MVP" }],
         description:
           "Reservations data structure(id,customerId,productId,status",
       },
@@ -164,11 +168,11 @@ export const lists = [
   {
     id: "5",
     title: "Back Office Page (backend)",
-    tags: ["MVP"],
     cards: [
       {
         id: "5a",
         title: "CRUD Reservations",
+        labels: [{ id: 1, color: "blue", name: "MVP" }],
         description:
           "Reservations data structure(id,customerId,productId,status",
       },
@@ -182,11 +186,11 @@ export const lists = [
   {
     id: "6",
     title: "Back Office Page (backend)",
-    tags: ["MVP"],
     cards: [
       {
         id: "6a",
         title: "CRUD Reservations",
+        labels: [{ id: 1, color: "blue", name: "MVP" }],
         description:
           "Reservations data structure(id,customerId,productId,status",
       },
@@ -200,11 +204,11 @@ export const lists = [
   {
     id: "7",
     title: "Back Office Page (backend)",
-    tags: ["MVP"],
     cards: [
       {
         id: "7a",
         title: "CRUD Reservations",
+        labels: [{ id: 1, color: "blue", name: "MVP" }],
         description:
           "Reservations data structure(id,customerId,productId,status",
       },
@@ -218,11 +222,11 @@ export const lists = [
   {
     id: "8",
     title: "Back Office Page (backend)",
-    tags: ["MVP"],
     cards: [
       {
         id: "8a",
         title: "CRUD Reservations",
+        labels: [{ id: 1, color: "blue", name: "MVP" }],
         description:
           "Reservations data structure(id,customerId,productId,status",
       },
