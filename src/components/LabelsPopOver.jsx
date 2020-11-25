@@ -1,8 +1,6 @@
 import React from "react";
 
 function LabelsPopOver(props) {
-    const 
-
   const popover = (
     <Popover id="add popover">
       <Popover.Title as="h5">{name}</Popover.Title>

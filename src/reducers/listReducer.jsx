@@ -1,20 +1,9 @@
 export const listReducer = (state, action) => {
-  const {
-    listId,
-    cardId,
-    groupId,
-    optionId,
-    property,
-    value,
-  } = action.payload;
+  const { listId, cardId, groupId, optionId, property, value } = action.payload;
 
-  const listIndex = state.findIndex(
-    (list) => list.id === listId
-  );
+  const listIndex = state.findIndex((list) => list.id === listId);
   const list = { ...state[listIndex] };
-  const cardIndex = list.cards.findIndex(
-    (card) => card.id === cardId
-  );
+  const cardIndex = list.cards.findIndex((card) => card.id === cardId);
 
   switch (action.type) {
     case "list title":
@@ -30,9 +19,7 @@ export const listReducer = (state, action) => {
       const checkListIndex = card.checkList.findIndex(
         (checklist) => checklist.id === groupId
       );
-      const optionIndex = card.checkList[
-        checkListIndex
-      ].options.findIndex(
+      const optionIndex = card.checkList[checkListIndex].options.findIndex(
         (option) => option.id === optionId
       );
 
@@ -45,11 +32,11 @@ export const listReducer = (state, action) => {
 
         case "checkbox":
           //toggle the boolean
-          state[listIndex].cards[cardIndex].checkList[
+          state[listIndex].cards[cardIndex].checkList[checkListIndex].options[
+            optionIndex
+          ].checked = !state[listIndex].cards[cardIndex].checkList[
             checkListIndex
-          ].options[optionIndex].checked = !state[listIndex]
-            .cards[cardIndex].checkList[checkListIndex]
-            .options[optionIndex].checked;
+          ].options[optionIndex].checked;
           break;
 
         case "group text":
@@ -59,20 +46,16 @@ export const listReducer = (state, action) => {
           break;
 
         case "option text":
-          state[listIndex].cards[cardIndex].checkList[
-            checkListIndex
-          ].options[optionIndex].name = value;
+          state[listIndex].cards[cardIndex].checkList[checkListIndex].options[
+            optionIndex
+          ].name = value;
           break;
 
         case "delete":
-          const checkList = state[listIndex].cards[
-            cardIndex
-          ].checkList.filter(
+          const checkList = state[listIndex].cards[cardIndex].checkList.filter(
             (group) => group.id !== groupId
           );
-          state[listIndex].cards[
-            cardIndex
-          ].checkList = checkList;
+          state[listIndex].cards[cardIndex].checkList = checkList;
           break;
 
         default:
@@ -91,17 +74,11 @@ export const listReducer = (state, action) => {
           };
 
           //check for existing checklist array
-          if (
-            !state[listIndex].cards[cardIndex].checkList
-          ) {
-            state[listIndex].cards[
-              cardIndex
-            ].checkList = [];
+          if (!state[listIndex].cards[cardIndex].checkList) {
+            state[listIndex].cards[cardIndex].checkList = [];
           }
 
-          state[listIndex].cards[cardIndex].checkList.push(
-            checklistGroup
-          );
+          state[listIndex].cards[cardIndex].checkList.push(checklistGroup);
           break;
 
         case "card":
@@ -122,14 +99,10 @@ export const listReducer = (state, action) => {
 
           //check for existing labels array
           if (!state[listIndex].cards[cardIndex].labels) {
-            state[listIndex].cards[
-              cardIndex
-            ].checkList = [];
+            state[listIndex].cards[cardIndex].checkList = [];
           }
 
-          state[listIndex].cards[cardIndex].labels.push(
-            checklistGroup
-          );
+          state[listIndex].cards[cardIndex].labels.push(checklistGroup);
           break;
 
         default:

@@ -1,25 +1,23 @@
 import React from "react";
-import { OverlayTrigger, Button } from "react-bootstrap";
-import ChecklistPopOver from "./ChecklistPopOver copy";
+import { OverlayTrigger, Popover, Button } from "react-bootstrap";
+import ChecklistPopOver from "./ChecklistPopOver";
 
 function PopOverTrigger({ listId, cardId, name }) {
   let popover;
 
   switch (name) {
     case "Checklist":
-      popover = React.forwardRef(({ ...props }, ref) => (
-        <ChecklistPopOver
-          listId={listId}
-          cardId={cardId}
-          name={name}
-          ref={ref}
-        />
-      ));
+      popover = (
+        <Popover id="popover-basic">
+          <ChecklistPopOver listId={listId} cardId={cardId} name={name} />
+        </Popover>
+      );
       break;
 
     default:
       break;
   }
+
   return (
     <OverlayTrigger
       trigger="click"
@@ -34,10 +32,7 @@ function PopOverTrigger({ listId, cardId, name }) {
       >
         <div className="align-left">
           {name === "Checklist" ? (
-            <i
-              className="gg-check-r"
-              style={{ marginRight: "10px" }}
-            />
+            <i className="gg-check-r" style={{ marginRight: "10px" }} />
           ) : (
             <i
               className="gg-tag"

@@ -1,12 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-  Card,
-  Button,
-  Container,
-  Row,
-  Col,
-  Form,
-} from "react-bootstrap";
+import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import TrelloCard from "./TrelloCard";
 import { ListsContext } from "./../context/listContext";
 
@@ -15,22 +8,29 @@ function TrelloList({ title, cards, id }) {
   const [showNewCard, setShowNewCard] = useState(false);
   const [cardTitle, setCardTitle] = useState("");
 
+  const createNewCard = (cardTitle) => {
+    if (cardTitle) {
+      changeValue({
+        type: "new",
+        payload: {
+          listId: id,
+          value: cardTitle,
+          property: "card",
+        },
+      });
+    }
+    setShowNewCard(false);
+  };
+
   return (
-    <Card
-      style={{ width: "16rem", height: "100%" }}
-      bg="light"
-    >
+    <Card style={{ width: "16rem", height: "100%" }} bg="light">
       <Card.Body style={{ padding: "10px" }}>
         <Card.Title className="card-title">
           <Container>
             <Row>
               <Col className="col-10">{title}</Col>
               <Col>
-                <Button
-                  variant="light"
-                  className="card-option-button"
-                  disabled
-                >
+                <Button variant="light" className="card-option-button" disabled>
                   •••
                 </Button>
               </Col>
@@ -39,30 +39,16 @@ function TrelloList({ title, cards, id }) {
         </Card.Title>
         {cards.map((card) => {
           return (
-            <TrelloCard
-              key={card.id}
-              listTitle={title}
-              listId={id}
-              {...card}
-            />
+            <TrelloCard key={card.id} listTitle={title} listId={id} {...card} />
           );
         })}
         {showNewCard ? (
           <Form.Control
             autoFocus
             as="textarea"
+            placeholder="Enter a title for this card..."
             value={cardTitle}
-            onBlur={() => {
-              setShowNewCard(false);
-              changeValue({
-                type: "new",
-                payload: {
-                  listId: id,
-                  value: cardTitle,
-                  property: "card",
-                },
-              });
-            }}
+            onBlur={() => createNewCard(cardTitle)}
             onChange={(event) => {
               setCardTitle(event.currentTarget.value);
             }}

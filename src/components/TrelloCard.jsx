@@ -35,14 +35,10 @@ function TrelloCard({
         className="p-2 m-1 task-hover pointer"
         key={id}
       >
-        {labels?.length > 0 && (
-          <div>{<Label labels={labels} />}</div>
-        )}
+        {labels?.length > 0 && <div>{<Label labels={labels} />}</div>}
         <div>{cardTitle}</div>
         <div>
-          {description ? (
-            <i className="gg-format-left" />
-          ) : null}
+          {description ? <i className="gg-format-left" /> : null}
           {checkList && checkList.length > 0 ? (
             <>
               <i className="gg-check-r" />
@@ -57,6 +53,7 @@ function TrelloCard({
       {showModal ? (
         <TrelloModal
           listId={listId}
+          cardTitle={cardTitle}
           cardId={id}
           listTitle={listTitle}
           description={description}

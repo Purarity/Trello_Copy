@@ -7,6 +7,7 @@ import PopOverTrigger from "./PopOverTrigger";
 
 function TrelloModal({
   listId,
+  cardTitle,
   cardId,
   listTitle,
   description,
@@ -15,10 +16,7 @@ function TrelloModal({
   handleCloseModal,
   labels,
 }) {
-  const [
-    showEditDescription,
-    setShowEditDescription,
-  ] = useState(false);
+  const [showEditDescription, setShowEditDescription] = useState(false);
   const [showEditTitle, setShowEditTitle] = useState(false);
   const [text, setText] = useState("");
   const newButtons = ["Checklist", "Labels"];
@@ -34,7 +32,7 @@ function TrelloModal({
         <Modal.Title style={{ width: "100%" }}>
           <div
             onClick={() => {
-              setText(text ? text : listTitle);
+              setText(cardTitle);
               setShowEditTitle(true);
             }}
           >
@@ -43,7 +41,7 @@ function TrelloModal({
                 setText={setText}
                 text={text}
                 setShowEditBox={setShowEditTitle}
-                type="list title"
+                type="card title"
                 payload={{
                   listId,
                   cardId,
@@ -51,21 +49,18 @@ function TrelloModal({
                 }}
               />
             ) : (
-              listTitle
+              cardTitle
             )}
           </div>
           <div className="list-title-in-task">
-            in list{" "}
-            <span className="underline">{listTitle}</span>
+            in list <span className="underline">{listTitle}</span>
           </div>
         </Modal.Title>
       </Modal.Header>
       <Row>
         <Col md={9}>
           <Modal.Body>
-            {labels?.length > 0 && (
-              <div>{<Label labels={labels} />}</div>
-            )}
+            {labels?.length > 0 && <div>{<Label labels={labels} />}</div>}
             <br />
             <h6>
               <i className="gg-format-left" />
