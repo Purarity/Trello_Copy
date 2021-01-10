@@ -1,6 +1,7 @@
 import React from "react";
 import { OverlayTrigger, Popover, Button } from "react-bootstrap";
 import ChecklistPopOver from "./ChecklistPopOver";
+import LabelPopOver from "./LabelPopOver";
 
 function PopOverTrigger({ listId, cardId, name }) {
   let popover;
@@ -10,6 +11,14 @@ function PopOverTrigger({ listId, cardId, name }) {
       popover = (
         <Popover id="popover-basic">
           <ChecklistPopOver listId={listId} cardId={cardId} name={name} />
+        </Popover>
+      );
+      break;
+
+      case "Labels":
+      popover = (
+        <Popover id="popover-basic">
+          <LabelPopOver listId={listId} cardId={cardId} name={name} />
         </Popover>
       );
       break;

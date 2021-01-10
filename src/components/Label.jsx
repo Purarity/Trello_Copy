@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { getButtonColor } from "../utils/buttonColor";
+import buttonColor from "../utils/buttonColor.json";
 
 function Label({ labels }) {
   return labels.map((label) => (
@@ -10,7 +10,7 @@ function Label({ labels }) {
         marginRight: "3px",
         marginBottom: "3px",
       }}
-      variant={getButtonColor(label.color)}
+      variant={buttonColor[label.color]}
       disabled
     >
       {label.name}

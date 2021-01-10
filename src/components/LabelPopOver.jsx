@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { Popover, Button, Form } from "react-bootstrap";
+import { ListsContext } from "../context/listContext";
 
-function LabelsPopOver(props) {
+function LabelPopOver({listId, cardId, name}) {
+  const { changeValue } = useContext(ListsContext);
+  const [text, setText] = useState("");
+
   const popover = (
-    <Popover id="add popover">
+    <>
       <Popover.Title as="h5">{name}</Popover.Title>
       <Popover.Content>
-        <h6>Title</h6>
+        <h6>Label</h6>
         <Form.Control
           autoFocus
           as="input"
@@ -22,7 +27,7 @@ function LabelsPopOver(props) {
               payload: {
                 listId,
                 cardId,
-                property: name.toLower(),
+                property: "label",
                 value: text,
               },
             });
@@ -33,10 +38,10 @@ function LabelsPopOver(props) {
           Add
         </Button>
       </Popover.Content>
-    </Popover>
+    </>
   );
 
-  return <div></div>;
+  return popover;
 }
 
-export default LabelsPopOver;
+export default LabelPopOver;
